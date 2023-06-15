@@ -25,7 +25,7 @@
 | jasperreports-chart-themes-6.2.2-20160505.150354-3.jar   | 6.2.2   | Apache License 2.0   |
 | jasperreports-fonts-6.1.1.jar   | 6.1.1   | Apache License 2.0   |
 | jasperreports-functions-6.2.2-20160505.150541-3.jar   | 6.2.2   | Apache License 2.0   |
-| jasper-runtime.jar   | ND   | Apache License 2.0   |
+| jasper-runtime.jar   | 5.5   | Apache License 2.0   |
 | jaxp-1.1.jar   | 1.1   | Oracle Binary Code License Agreement for Java SE   |
 | jaxrpc-1.1.jar   | 1.1   | Oracle Binary Code License Agreement for Java SE    | 
 | jms-1.0.2b.jar   | 1.0.2b   | Apache License 2.0   | 
@@ -38,7 +38,7 @@
 | servlet-2.4.jar   | 2.4   | CDDL GPL 2.0   |
 | servlet-api-2.3.jar   | 2.3   | Apache License 2.0   |
 | soap-2.3.1.jar   | 2.3.1   | Apache License 2.0   |
-| spring.jar   | 2.0.X OPPURE 1.X   | Apache License 2.0   |
+| spring.jar   | 2.0.X   | Apache License 2.0   |
 | webservices-9.2.2.0.jar   | 9.2.2   | GNU Lesser General Public License (LGPL)   |
 | wsdl4j-1.5.1.jar   | 1.5.1   | Apache License 2.0   |
 | xbean-9.2.2.0.jar   | 9.2.2.0   | Apache License 2.0   |
