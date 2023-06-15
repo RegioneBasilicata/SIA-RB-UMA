@@ -1,0 +1,386 @@
+<project name="solmruma" xmlns:ivy="antlib:fr.jayasoft.ivy.ant" default="distribution">
+  <description>Build file for solmruma</description>
+  <property name="buildfiles" location="buildfiles" />
+  <loadproperties srcFile="${buildfiles}/build.properties" />
+  <property name="weblogic.lib" value="lib" />
+  <property name="lib" location="lib" />
+  <property environment="env" />
+  <target name="help">
+    <echo>
+      <![CDATA[
+       Build file for Solmr${line.separator}
+       Utilizzo: ant [NOME_TARGET]${line.separator}
+       dove NOME_TARGET e' uno dei seguenti:${line.separator}
+       help    : visualizza questo messaggio
+       clean   : cancella le directory temporanee e di destinazione
+       compile-all     : compila i sorgenti
+       package-jar     : crea il file .jar con gli ejb
+       package-war     : crea il file .war della webapp
+       package-ear     : crea il file .ear (dipende da "ejb" e "war")${line.separator}
+       comportamento predefinito : compilazione delle pagine
+       esclusione della precompilazione:   ant ear -Dnoprecompile_jsp=true
+    ]]>
+    </echo>
+  </target>
+
+  <target name="default" description="verifica se eseguire il build per un solo environment specificato a linea di commando con –Dtarget=${target} o per tutti gli environment">
+    <condition property="first-call" value="distribution">
+      <not>
+        <equals arg1="${target}" arg2="$${target}" />
+      </not>
+    </condition>
+    <condition property="first-call" value="all-target">
+      <equals arg1="${target}" arg2="$${target}" />
+    </condition>
+
+    <echo message="target: ${target}" />
+    <echo message="first-call: ${first-call}" />
+
+    <antcall target="${first-call}" />
+  </target>
+
+  <target name="all-target" description="Lancia il build per le varie distribuzioni in sequenza">
+    <antcall target="distribution">
+      <param name="target" value="dev" />
+    </antcall>
+
+    <antcall target="distribution">
+      <param name="target" value="tst" />
+    </antcall>
+
+    <antcall target="distribution">
+      <param name="target" value="coll" />
+    </antcall>
+
+    <antcall target="distribution">
+      <param name="target" value="prod" />
+    </antcall>
+  </target>
+
+  <target name="package-all" description="esegue il packaging di ogni componente del prodotto">
+    <loadproperties srcFile="buildfiles/${target}.properties" />
+    <antcall target="package-ear" />
+  </target>
+
+  <target name="distribution" description="crea il tar contenente l'ear" depends="package-all">
+    <echo>component is ${component}</echo>
+    <tar tarfile="${dist}/${target}/${component}-${versione}.tar" basedir="${dist}/${target}" includes="${component}.ear">
+    </tar>
+  	<jar jarfile="${dist}/${target}/${component}-client-${versione}.jar"
+  	      basedir="${build}/classes" includes="it/csi/solmr/dto/uma/AttestatoProprietaVO*,
+  	      											 it/csi/solmr/dto/uma/DatiMacchinaVO*,
+  	      											 it/csi/solmr/dto/uma/DittaUMAVO*,
+  	      											 it/csi/solmr/dto/uma/MacchinaVO*,
+  		                                             it/csi/solmr/dto/uma/TipoCategoriaVO*,
+  	                                                 it/csi/solmr/dto/uma/MatriceVO*,
+  	      											 it/csi/solmr/dto/uma/PossessoVO*,
+  	      											 it/csi/solmr/dto/uma/RottamazioneVO*,
+  	      											 it/csi/solmr/dto/uma/TargaVO*,
+  	      											 it/csi/solmr/dto/uma/UmaBaseVO*,
+  	      											 it/csi/solmr/dto/uma/UtilizzoVO*,
+  	                                                 it/csi/solmr/exception/services/UmaServiceException*,
+  	      											 it/csi/solmr/interfaceCSI/uma/UmaCSIInterface*">
+  	            <manifest>
+  			    	<attribute name="Built-By" value="${user.name}"/>
+  			    	<attribute name="Built-Date" value="${DSTAMP}"/>
+  			    </manifest>
+  	</jar>
+    <delete>
+      <fileset dir="${dist}/${target}" excludes="${component}-${versione}.tar,${component}-client-${versione}.jar" />
+    </delete>
+  </target>
+
+  <!-- Task di inizializzazione per la creazione delle directory necessarie per il build dell'applicativo -->
+  <target name="init" description="Inizializza lo script Ant">
+    <tstamp>
+      <format property="today" pattern="dd/MM/yyyy HH:mm:ss" />
+    </tstamp>
+
+    <echo message="Build start at : ${today}" />
+
+    <condition property="target" value="tst-int-01">
+      <equals arg1="${target}" arg2="$${target}" />
+    </condition>
+
+    <condition property="target" value="tst-int-01">
+      <equals arg1="${target}" arg2="dev" />
+    </condition>
+  	
+    <echo message="Ambiente target: ${target}" />
+
+    <condition property="isset_precompile_jsp" value="true">
+      <isset property="noprecompile_jsp" />
+    </condition>
+
+    <condition property="isset_precompile_jsp" value="false">
+      <not>
+        <isset property="noprecompile_jsp" />
+      </not>
+    </condition>
+
+    <echo message="Escludi precompilazione: ${isset_precompile_jsp}" />
+
+    <loadproperties srcFile="buildfiles/${target}.properties" />
+    <loadproperties srcFile="buildfiles/build.properties" />
+
+    <mkdir dir="${build}" />
+    <mkdir dir="${dist}/${target}" />
+    <!-- necessario per invocare le property di ambiente -->
+  </target>
+
+  <target name="resolve-dependencies" description="carica le librerie dal repository remoto">
+  	<!--
+    <ivy:configure file="buildfiles/ivyconf.xml" />
+    <ivy:resolve file="buildfiles/ivy.xml" />
+    -->
+  </target>
+
+  <target name="load-dependencies" depends="resolve-dependencies" description="Risolve le dipendenze esterne.">
+    <!--
+  	<echo>Target load-dependencies BEGIN</echo>
+    <ivy:retrieve pattern="lib/[artifact].[type]" />
+    <echo>Target load-dependencies END</echo>
+    -->
+  </target>
+
+  <!-- Funzione che elimina la precedente directory lib e ne crea una nuova caricandola con le librerie presenti su
+       repart.csi.it e quelle presenti nella directory locale delle librerie non ancora esposte -->
+  <target name="clean-create-lib" description="elimina, ricrea e popola la cartella lib">
+    <!--
+  	<echo>Target clean-create-lib BEGIN</echo>
+    <delete dir="lib" />
+    <delete dir="build" />
+    <mkdir dir="lib" />
+    <antcall target="load-dependencies" />
+    -->
+    <echo>Target clean-create-lib END</echo>
+  </target>
+
+  <!-- cancellazione delle directory temporanee -->
+  <target name="clean">
+  	<echo>Target clean BEGIN</echo>
+  	<delete dir="${dist}/**" />
+  	<delete dir="${build}/**" />  
+    <echo>Target clean END</echo>
+  </target>
+
+  <!-- Compilazione dei file .java all'interno della cartella "src" e creazione dei file .class nella cartella "build/classes" -->
+  <target name="compile-all" depends="init, load-dependencies">
+    <echo>Target compile-all BEGIN</echo>
+    <delete dir="${ejb_build_dir}" />
+    <mkdir dir="${ejb_build_dir}" />
+    <path id="ref.lib">
+      <fileset dir="lib">
+        <include name="**/*.jar" />
+        <include name="**/*.zip" />
+      </fileset>
+    </path>
+
+    <pathconvert property="path.lib" refid="ref.lib" pathsep=";" />
+    <javac srcdir="${src}" destdir="${ejb_build_dir}" fork="yes" encoding="iso8859-15" classpath="${path.lib}" debug="true" />
+    <!-- Copia di tutti i file, esclusi i .java, dalla cartella "src" a  "build/classes" -->
+    <copy todir="${ejb_build_dir}">
+      <fileset dir="${src}" excludes="**/*.java*,**/*.jbx*" />
+    </copy>
+  	<!-- PD WS SMRGAASV ANAGSERVICE -->
+  	<replace file="${ejb_build_dir}/it/csi/solmr/etc/anag/pdAnag.xml" token="@SMRGAAWEB_SERVICE_ENDPOINT_URL@" value="${smrgaaService_service_endpoint_url}"/>
+  	<replace file="${ejb_build_dir}/it/csi/solmr/etc/services/pdAnagService.xml" token="@SMRGAASVSERVICE_SERVICE_ENDPOINT_URL@" value="${anagService_service_endpoint_url}"/>
+  	<!-- -->
+  	<replace file="${ejb_build_dir}/it/csi/solmr/etc/services/smrcomm-client.xml" token="@SMRCOMMSERVICE_SERVICE_ENDPOINT_URL@" value="${smrcommService_service_endpoint_url}"/>
+  	<replace file="${ejb_build_dir}/it/csi/solmr/etc/services/pdComuneService.xml" token="@COMUNESERVICE_SERVICE_ENDPOINT_URL@" value="${comuneService_service_endpoint_url}"/>
+  	<replace file="${ejb_build_dir}/it/csi/solmr/etc/services/pdReportDin.xml" token="@REPORTDIN_SERVICE_ENDPOINT_URL@" value="${PROVIDER.URL.PDREPORTDIN}"/>
+  	<replace file="${ejb_build_dir}/it/csi/solmr/etc/generalString.properties" token="@@PAPUA_URL_WS@@" value="${ws.profilazione.papua.url}"/>
+  	<replace file="${ejb_build_dir}/it/csi/solmr/etc/generalString.properties" token="@@URL_PAPUA_WS_MESSAGGISTICA@@" value="${ws.messaggistica.papua.url}"/>
+  	<replace file="${ejb_build_dir}/it/csi/solmr/etc/generalString.properties" token="@@URL_GAASERV_WS@@" value="${ws.gaaserv.url}"/>
+  	
+    <echo>Target compile-all END</echo>
+  </target>
+
+  <!-- crea il file .jar con gli EJB -->
+  <target name="package-jar" depends="compile-all">
+    <mkdir dir="${dist}/${target}" />
+    <delete file="${dist}/${target}/${appname}_ejb.jar" />
+
+    <delete dir="${ejb_build_dir}/META-INF" />
+    <mkdir dir="${ejb_build_dir}/META-INF" />
+
+    <copy todir="${ejb_build_dir}/META-INF">
+      <fileset dir="${conf}/ejb/${appname}" includes="*.xml" />
+    </copy>
+  	
+  	<copy todir="${ejb_build_dir}">
+		<fileset dir="${conf}/" includes="*.wsdl" />
+	</copy>
+
+    <jar destfile="${dist}/${target}/${appname}_ejb.jar" basedir="${ejb_build_dir}" excludes="*.xml">
+      <manifest>
+        <attribute name="Built-By" value="${user.name}" />
+        <attribute name="Built-Date" value="${DSTAMP}" />
+      </manifest>
+      <zipfileset file="${ejb_build_dir}/pd-smrgaasv-client.xml"/>
+      <zipfileset file="${ejb_build_dir}/gaaserv-client.xml"/>
+      <zipfileset file="${ejb_build_dir}/gaaserv-client-HL.xml"/>
+      <zipfileset file="${ejb_build_dir}/pd-smrcomm-client.xml"/>
+      <zipfileset file="${ejb_build_dir}/pdReportDin.xml"/>
+      <zipfileset file="${ejb_build_dir}/constantsReportDin.xml"/>
+      <zipfileset file="${ejb_build_dir}/defPDPEPEJB.xml" />
+      <zipfileset file="${ejb_build_dir}/defPDUtilityEJB.xml" />
+    </jar>
+  </target>
+
+  <target name="package-war" depends="package-jar">
+    <mkdir dir="${dist}/${target}" />
+    <delete file="${dist}/${target}/${appname}.war" />
+
+    <delete dir="${war_build_dir}" />
+    <mkdir dir="${war_build_dir}" />
+
+    <!-- crea una copia della webapp in una dir temporanea -->
+    <copy todir="${war_build_dir}">
+      <fileset dir="${web-app}" />
+    </copy>
+
+    <!-- sostituisce il valore di urlPAIridePEP nel web.xml e setta correttamente la PA nella PD di SSOBART -->
+    <copy todir="${war_build_dir}/WEB-INF">
+      <fileset dir="${conf}/war">
+        <include name="web.xml" />
+      </fileset>
+    </copy>
+
+    <replaceregexp match="(&lt;param-name&gt;portaleRupar&lt;/param-name&gt;[^&lt;]*&lt;param-value&gt;)[^&lt;]*(&lt;/param-value&gt;)" replace="\1${url.activesite.rupar}\2" flags="s" byline="false">
+      <fileset dir="${war_build_dir}/WEB-INF" includes="web.xml" />
+    </replaceregexp>
+    <replaceregexp match="(&lt;param-name&gt;portaleSispie&lt;/param-name&gt;[^&lt;]*&lt;param-value&gt;)[^&lt;]*(&lt;/param-value&gt;)" replace="\1${url.activesite.sispie}\2" flags="s" byline="false">
+      <fileset dir="${war_build_dir}/WEB-INF" includes="web.xml" />
+    </replaceregexp>
+
+
+	<!-- APP.NAME MESSAGGISTICA -->
+  	<replaceregexp match="app.name" replace="${appname}" flags="s" byline="false">
+  	      <fileset dir="${war_build_dir}/js" includes="messaggistica.js" />
+  	</replaceregexp>
+  	<replaceregexp match="app.name" replace="${appname}" flags="s" byline="false">
+  	      <fileset dir="${war_build_dir}/layout" includes="blocco_messaggistica.html" />
+  	</replaceregexp>
+  	<!-- APP.NAME MESSAGGISTICA -->
+    
+    <war destfile="${dist}/${target}/${appname}.war" webxml="${war_build_dir}/WEB-INF/web.xml">
+      <fileset dir="${war_build_dir}" excludes="WEB-INF/web.xml" />
+      <webinf dir="${conf}/war" includes="weblogic.xml" />
+      <manifest>
+        <attribute name="Built-By" value="${user.name}" />
+        <attribute name="Built-Date" value="${DSTAMP}" />
+      </manifest>
+    </war>
+
+  </target>
+
+  <target name="package-ear" depends="clean,package-war,_package-all-wsfad-wars">
+    <!-- <antcall target="_smrcomm-config" /> -->
+    <path id="ref.ear.lib">
+      <fileset dir="lib">
+        <include name="**/*.jar" />
+        <include name="**/*.zip" />
+        <exclude name="wl*.jar" />
+        <exclude name="webservices*.jar" />
+        <exclude name="javelin*.jar" />
+        <exclude name="bcel*.jar" />
+        <exclude name="api-*.jar" />
+        <exclude name="weblogic*.jar" />
+        <exclude name="xbean*.jar" />
+      </fileset>
+    </path>
+
+    <pathconvert property="path.ear.lib" refid="ref.ear.lib" pathsep=",">
+      <map from="${lib}${file.separator}" to="" />
+    </pathconvert>
+    <ear destfile="${dist}/${target}/${appname}.ear" appxml="${conf}/ear/application.xml">
+      <fileset dir="${dist}/${target}" includes="*.war" />
+      <fileset dir="${dist}/${target}" includes="${appname}_ejb.jar" />
+      <fileset dir="${dist}/${target}" includes="${appname}_etc.jar" />	
+    	
+      <zipfileset dir="lib" includes="${path.ear.lib}" prefix="lib" />
+      
+      <metainf dir="${conf}/ear/" excludes="application.xml, .mf" /> 
+
+      <manifest>
+        <attribute name="Built-By" value="${user.name}" />
+        <attribute name="Built-Date" value="${DSTAMP}" />
+      </manifest>
+    </ear>
+  </target>
+
+  <target name="_make_zip" depends="init" description="crea lo zip contenente i sorgenti">
+    <delete file="${dist}/${appname}-${versione}.zip" />
+    <zip destfile="${dist}/${appname}-${versione}.zip" basedir="." includes="build.xml,buildfiles/**,src/**,conf/**" excludes="**/.svn/**, **/*.bak">
+    </zip>
+  </target>
+
+  <target name="_make_tar" if="maketar" description="crea il tar contenente l'ear">
+    <delete file="${dist}/${target}/${appname}-${versione}.tar" />
+    <tar tarfile="${dist}/${target}/${appname}-${versione}.tar" basedir="${dist}/${target}" includes="${appname}.ear">
+    </tar>
+  </target>
+
+  <target name="about" description="Visualizza l'elenco dei target pubblici dello script.">
+    <loadproperties srcfile="buildfiles/build.properties" />
+    <loadfile property="about" srcfile="buildfiles/about.txt" />
+    <echo message="${about}" />
+  </target>
+
+  <target name="about-custom" description="Visualizza l'elenco di tutti i target, pubblici e privati (equivalente a 'ant -projecthelp')">
+    <loadproperties srcfile="buildfiles/build.properties" />
+    <loadfile property="about-custom" srcfile="buildfiles/about-custom.txt" />
+    <echo message="${about-custom}" />
+    <java classname="org.apache.tools.ant.Main">
+      <arg value="-projecthelp" />
+    </java>
+  </target>
+
+  <target name="show-vars" depends="init" description="Visualizza tutte le variabili impostate nei file di properties e/o da linea di comando">
+    <echo message="*****************************************" />
+    <echo message="********  ${component} environment  *******" />
+    <echo message="*****************************************" />
+    <echoproperties />
+    <echo />
+    <echo />
+    <echo message="*****************************************" />
+    <echo message="********    java properties      *******" />
+    <echo message="*****************************************" />
+    <echoproperties prefix="java." />
+
+  </target>
+	
+	<!-- costruisce i war dei wsfad -->
+    <target name="_package-all-wsfad-wars">
+    	
+    	<!-- richiamo costruzione war wsfad servizio prova -->
+    	<antcall target="_package-wsfad-war">
+    		<param name="component.name" value="solmruma"/>
+    		<param name="service.name" value="umaaxis"/>
+    		<param name="binding.code" value="wsfad"/>
+    		<param name="service.type" value="appl"/>
+    	</antcall>
+    
+    </target>
+	
+	<target name="_package-wsfad-war" >
+		<echo message="src: ${build}/${target}/${service.type}-${service.name}-${binding.code}.war"/>
+		<echo message="src: ${dist}/${target}/${service.type}-${service.name}-${binding.code}.war"/>
+      <!-- prende in input i parametri component.name service.name binding.code -->
+      <mkdir dir="${build}/${target}/${binding.code}/${service.name}/WEB-INF" />
+         
+		<war destfile="${dist}/${target}/${service.type}-${service.name}-${binding.code}.war"
+             webxml="${conf}/web/${binding.code}/${service.name}/WEB-INF/web.xml" 
+			 roundup= "false">
+			 <webinf file="${conf}/web/${binding.code}/${service.name}/WEB-INF/server-config.wsdd" />
+			 <webinf file="${conf}/web/${binding.code}/${service.name}/WEB-INF/jboss-web.xml" />
+			 <webinf file="${conf}/web/${binding.code}/${service.name}/WEB-INF/weblogic.xml" />
+			 <classes dir="src/web/${binding.code}/${service.name}" 
+				includes="defpdelegata_embedded*.xml" />
+			<fileset dir="src/web/${binding.code}/${service.name}" includes="**">			
+			</fileset>
+		</war>
+    </target>	
+
+</project>

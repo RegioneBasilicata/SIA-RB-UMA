@@ -1,0 +1,310 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions name="messaggistica" targetNamespace="http://papuaserv.webservice.business.papuaserv.papua.csi.it/" xmlns:ns1="http://cxf.apache.org/bindings/xformat" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://papuaserv.webservice.business.papuaserv.papua.csi.it/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://papuaserv.webservice.business.papuaserv.papua.csi.it/" xmlns:tns="http://papuaserv.webservice.business.papuaserv.papua.csi.it/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="confermaLetturaMessaggio" type="tns:confermaLetturaMessaggio" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+<xs:element name="confermaLetturaMessaggioResponse" type="tns:confermaLetturaMessaggioResponse" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+<xs:element name="getAllegato" type="tns:getAllegato" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+<xs:element name="getAllegatoResponse" type="tns:getAllegatoResponse" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+<xs:element name="getDettagliMessaggio" type="tns:getDettagliMessaggio" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+<xs:element name="getDettagliMessaggioResponse" type="tns:getDettagliMessaggioResponse" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+<xs:element name="getListaMessaggi" type="tns:getListaMessaggi" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+<xs:element name="getListaMessaggiResponse" type="tns:getListaMessaggiResponse" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+<xs:element name="verificaLogout" type="tns:verificaLogout" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+<xs:element name="verificaLogoutResponse" type="tns:verificaLogoutResponse" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+<xs:complexType name="getAllegato" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:sequence xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="idAllegato" type="xs:long" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getAllegatoResponse" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:sequence xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element minOccurs="0" name="allegato" type="xs:base64Binary" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getDettagliMessaggio" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:sequence xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="idElencoMessaggi" type="xs:long" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+<xs:element minOccurs="0" name="codiceFiscale" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getDettagliMessaggioResponse" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:sequence xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element minOccurs="0" name="dettagliMessaggio" type="tns:dettagliMessaggio" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="dettagliMessaggio" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:complexContent xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:extension base="tns:messaggioBase" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:sequence xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element maxOccurs="unbounded" minOccurs="0" name="allegati" nillable="true" type="tns:allegato" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+<xs:element minOccurs="0" name="testoMessaggio" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+<xs:element minOccurs="0" name="utenteAggiornamento" type="tns:utenteAggiornamento" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType abstract="true" name="messaggioBase" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:sequence xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element minOccurs="0" name="dataInizioValidita" type="xs:dateTime" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+<xs:element name="idElencoMessaggi" type="xs:long" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+<xs:element name="idTipoMessaggio" type="xs:long" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+<xs:element name="letto" type="xs:boolean" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+<xs:element name="letturaObbligatoria" type="xs:boolean" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+<xs:element minOccurs="0" name="titolo" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="allegato" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:sequence xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element minOccurs="0" name="descrizione" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+<xs:element name="idAllegato" type="xs:long" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+<xs:element minOccurs="0" name="nomeFile" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="utenteAggiornamento" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:sequence xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element minOccurs="0" name="codiceEnte" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+<xs:element minOccurs="0" name="cognome" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+<xs:element minOccurs="0" name="denominazioneEnte" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+<xs:element name="idUtente" type="xs:long" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+<xs:element minOccurs="0" name="nome" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="confermaLetturaMessaggio" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:sequence xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="idElencoMessaggi" type="xs:long" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+<xs:element minOccurs="0" name="codiceFiscale" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="confermaLetturaMessaggioResponse" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:sequence xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+</xs:complexType>
+<xs:complexType name="verificaLogout" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:sequence xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="arg0" type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+<xs:element minOccurs="0" name="arg1" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="verificaLogoutResponse" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:sequence xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+</xs:complexType>
+<xs:complexType name="getListaMessaggi" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:sequence xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="idProcedimento" type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+<xs:element minOccurs="0" name="codiceRuolo" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+<xs:element minOccurs="0" name="codiceFiscale" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+<xs:element name="tipoMessaggio" type="xs:int" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+<xs:element minOccurs="0" name="letto" type="xs:boolean" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+<xs:element minOccurs="0" name="obbligatorio" type="xs:boolean" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+<xs:element minOccurs="0" name="visibile" type="xs:boolean" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getListaMessaggiResponse" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:sequence xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element minOccurs="0" name="listaMessaggi" type="tns:listaMessaggi" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="listaMessaggi" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:sequence xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element maxOccurs="unbounded" minOccurs="0" name="messaggi" nillable="true" type="tns:messaggio" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+<xs:element name="numeroMessaggiGenerici" type="xs:long" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+<xs:element name="numeroMessaggiLogout" type="xs:long" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+<xs:element name="numeroMessaggiTestata" type="xs:long" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+<xs:element name="numeroTotaleMessaggi" type="xs:long" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="messaggio" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:complexContent xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:extension base="tns:messaggioBase" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:sequence xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="conAllegati" type="xs:boolean" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:element name="InternalException" type="tns:InternalException" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+<xs:complexType name="InternalException" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:sequence xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="nestedExcClassName" nillable="true" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+<xs:element name="stackTraceMessage" nillable="true" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+<xs:element name="nestedExcMsg" nillable="true" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+</xs:sequence>
+</xs:complexType>
+<xs:element name="LogoutException" type="tns:LogoutException" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+<xs:complexType name="LogoutException" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:sequence xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="nestedExcClassName" nillable="true" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+<xs:element name="stackTraceMessage" nillable="true" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+<xs:element name="nestedExcMsg" nillable="true" type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getAllegato" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    <wsdl:part element="tns:getAllegato" name="parameters" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="verificaLogoutResponse" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    <wsdl:part element="tns:verificaLogoutResponse" name="parameters" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="verificaLogout" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    <wsdl:part element="tns:verificaLogout" name="parameters" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="LogoutException" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    <wsdl:part element="tns:LogoutException" name="LogoutException" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="confermaLetturaMessaggioResponse" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    <wsdl:part element="tns:confermaLetturaMessaggioResponse" name="parameters" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="InternalException" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    <wsdl:part element="tns:InternalException" name="InternalException" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getDettagliMessaggioResponse" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    <wsdl:part element="tns:getDettagliMessaggioResponse" name="parameters" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="confermaLetturaMessaggio" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    <wsdl:part element="tns:confermaLetturaMessaggio" name="parameters" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getDettagliMessaggio" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    <wsdl:part element="tns:getDettagliMessaggio" name="parameters" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getListaMessaggiResponse" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    <wsdl:part element="tns:getListaMessaggiResponse" name="parameters" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getListaMessaggi" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    <wsdl:part element="tns:getListaMessaggi" name="parameters" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAllegatoResponse" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    <wsdl:part element="tns:getAllegatoResponse" name="parameters" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="IMessaggisticaWS" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    <wsdl:operation name="getAllegato" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+      <wsdl:input message="tns:getAllegato" name="getAllegato" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    </wsdl:input>
+      <wsdl:output message="tns:getAllegatoResponse" name="getAllegatoResponse" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    </wsdl:output>
+      <wsdl:fault message="tns:InternalException" name="InternalException" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getDettagliMessaggio" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+      <wsdl:input message="tns:getDettagliMessaggio" name="getDettagliMessaggio" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    </wsdl:input>
+      <wsdl:output message="tns:getDettagliMessaggioResponse" name="getDettagliMessaggioResponse" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    </wsdl:output>
+      <wsdl:fault message="tns:InternalException" name="InternalException" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="confermaLetturaMessaggio" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+      <wsdl:input message="tns:confermaLetturaMessaggio" name="confermaLetturaMessaggio" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    </wsdl:input>
+      <wsdl:output message="tns:confermaLetturaMessaggioResponse" name="confermaLetturaMessaggioResponse" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    </wsdl:output>
+      <wsdl:fault message="tns:InternalException" name="InternalException" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="verificaLogout" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+      <wsdl:input message="tns:verificaLogout" name="verificaLogout" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    </wsdl:input>
+      <wsdl:output message="tns:verificaLogoutResponse" name="verificaLogoutResponse" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    </wsdl:output>
+      <wsdl:fault message="tns:LogoutException" name="LogoutException" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    </wsdl:fault>
+      <wsdl:fault message="tns:InternalException" name="InternalException" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getListaMessaggi" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+      <wsdl:input message="tns:getListaMessaggi" name="getListaMessaggi" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    </wsdl:input>
+      <wsdl:output message="tns:getListaMessaggiResponse" name="getListaMessaggiResponse" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    </wsdl:output>
+      <wsdl:fault message="tns:LogoutException" name="LogoutException" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    </wsdl:fault>
+      <wsdl:fault message="tns:InternalException" name="InternalException" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="messaggisticaSoapBinding" type="tns:IMessaggisticaWS" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <wsdl:operation name="getAllegato" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+      <soap:operation soapAction="" style="document" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <wsdl:input name="getAllegato" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </wsdl:input>
+      <wsdl:output name="getAllegatoResponse" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </wsdl:output>
+      <wsdl:fault name="InternalException" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+        <soap:fault name="InternalException" use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getDettagliMessaggio" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+      <soap:operation soapAction="" style="document" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <wsdl:input name="getDettagliMessaggio" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </wsdl:input>
+      <wsdl:output name="getDettagliMessaggioResponse" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </wsdl:output>
+      <wsdl:fault name="InternalException" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+        <soap:fault name="InternalException" use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="confermaLetturaMessaggio" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+      <soap:operation soapAction="" style="document" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <wsdl:input name="confermaLetturaMessaggio" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </wsdl:input>
+      <wsdl:output name="confermaLetturaMessaggioResponse" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </wsdl:output>
+      <wsdl:fault name="InternalException" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+        <soap:fault name="InternalException" use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getListaMessaggi" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+      <soap:operation soapAction="" style="document" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <wsdl:input name="getListaMessaggi" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </wsdl:input>
+      <wsdl:output name="getListaMessaggiResponse" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </wsdl:output>
+      <wsdl:fault name="LogoutException" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+        <soap:fault name="LogoutException" use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </wsdl:fault>
+      <wsdl:fault name="InternalException" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+        <soap:fault name="InternalException" use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="verificaLogout" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+      <soap:operation soapAction="" style="document" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <wsdl:input name="verificaLogout" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </wsdl:input>
+      <wsdl:output name="verificaLogoutResponse" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </wsdl:output>
+      <wsdl:fault name="LogoutException" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+        <soap:fault name="LogoutException" use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </wsdl:fault>
+      <wsdl:fault name="InternalException" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+        <soap:fault name="InternalException" use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="messaggistica" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    <wsdl:port binding="tns:messaggisticaSoapBinding" name="messaggisticaPort" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+      <soap:address location="http://tst-spjbosscp09-02.self.csi.it:25110/papuaserv/ws/messaggistica" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

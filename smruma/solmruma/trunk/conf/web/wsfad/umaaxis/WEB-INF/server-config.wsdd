@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+ <globalConfiguration>
+  <parameter name="adminPassword" value="admin"/>
+  <parameter name="attachments.Directory" value="attachments"/>
+  <parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
+  <parameter name="sendXsiTypes" value="true"/>
+  <parameter name="sendMultiRefs" value="true"/>
+  <parameter name="sendXMLDeclaration" value="true"/>
+  <parameter name="axis.sendMinimizedElements" value="true"/>
+  <requestFlow>
+   <handler type="java:org.apache.axis.handlers.JWSHandler">
+    <parameter name="scope" value="session"/>
+   </handler>
+   <handler type="java:org.apache.axis.handlers.JWSHandler">
+    <parameter name="scope" value="request"/>
+    <parameter name="extension" value=".jwr"/>
+   </handler>
+  </requestFlow>
+ </globalConfiguration>
+ <handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler"/>
+ <handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder"/>
+ <handler name="URLMapper" type="java:org.apache.axis.handlers.http.URLMapper"/>
+ <service name="Version2" provider="java:RPC">
+  <parameter name="allowedMethods" value="getVersion"/>
+  <parameter name="className" value="org.apache.axis.Version"/>
+ </service>
+ <service name="AdminService" provider="java:MSG">
+  <parameter name="allowedMethods" value="AdminService"/>
+  <parameter name="enableRemoteAdmin" value="false"/>
+  <parameter name="className" value="org.apache.axis.utils.Admin"/>
+  <namespace>http://xml.apache.org/axis/wsdd/</namespace>
+ </service>
+
+ <service name="umaaxis" provider="Handler"   >
+  <parameter name="wsdlPortType" value="umaaxis" />
+  <parameter name="allowedMethods" value="*"/>
+  <parameter name="defPDResource" value="/defpdelegata_embedded_uma.xml"/>
+  <parameter name="className" value="it.csi.solmr.interfaceCSI.uma.UmaCSIInterface"/>
+  <parameter name="handlerClass" value="it.csi.csi.wrapper.jaxrpc.axis.PDProvider"/>
+  
+  <beanMapping languageSpecificType="java:it.csi.csi.wrapper.CSIException" qname="ns2:CSIException" xmlns:ns2="urn:umaaxis"/>
+  <beanMapping languageSpecificType="java:it.csi.csi.wrapper.UserException" qname="ns3:UserException" xmlns:ns3="urn:umaaxis"/>
+  <beanMapping languageSpecificType="java:it.csi.csi.wrapper.SystemException" qname="ns4:SystemException" xmlns:ns4="urn:umaaxis"/>
+  <beanMapping languageSpecificType="java:it.csi.csi.wrapper.UnrecoverableException" qname="ns5:UnrecoverableException" xmlns:ns5="urn:umaaxis"/>
+  <beanMapping languageSpecificType="java:it.csi.csi.wrapper.CommunicationException" qname="ns6:CommunicationException" xmlns:ns6="urn:umaaxis"/>
+  <!-- mapping delle user defined entities -->
+  <beanMapping languageSpecificType="java:it.csi.solmr.dto.uma.MacchinaVO" qname="ns7:MacchinaVO" xmlns:ns7="urn:umaaxis"/>
+  <beanMapping languageSpecificType="java:it.csi.solmr.dto.uma.MatriceVO" qname="ns8:MatriceVO" xmlns:ns8="urn:umaaxis"/>
+  <beanMapping languageSpecificType="java:it.csi.solmr.dto.uma.DatiMacchinaVO" qname="ns9:DatiMacchinaVO" xmlns:ns9="urn:umaaxis"/>
+  <beanMapping languageSpecificType="java:it.csi.solmr.dto.uma.TargaVO" qname="ns10:TargaVO" xmlns:ns10="urn:umaaxis"/>
+  <beanMapping languageSpecificType="java:it.csi.solmr.dto.uma.UtilizzoVO" qname="ns11:UtilizzoVO" xmlns:ns11="urn:umaaxis"/>
+  <beanMapping languageSpecificType="java:it.csi.solmr.dto.uma.PossessoVO" qname="ns12:PossessoVO" xmlns:ns12="urn:umaaxis"/>
+  <beanMapping languageSpecificType="java:it.csi.solmr.dto.uma.AttestatoProprietaVO" qname="ns13:AttestatoProprietaVO" xmlns:ns13="urn:umaaxis"/>
+  <beanMapping languageSpecificType="java:it.csi.solmr.dto.uma.TipoCategoriaVO" qname="ns14:TipoCategoriaVO" xmlns:ns14="urn:umaaxis"/>  
+  <beanMapping languageSpecificType="java:it.csi.solmr.dto.uma.RottamazioneVO" qname="ns15:RottamazioneVO" xmlns:ns15="urn:umaaxis"/>
+  <beanMapping languageSpecificType="java:it.csi.solmr.dto.uma.DittaUMAVO" qname="ns16:DittaUMAVO" xmlns:ns16="urn:umaaxis"/>
+  <beanMapping languageSpecificType="java:it.csi.solmr.dto.CodeDescription" qname="ns17:CodeDescription" xmlns:ns17="urn:umaaxis"/>
+  <beanMapping languageSpecificType="java:it.csi.solmr.dto.profile.RuoloUtenza" qname="ns18:RuoloUtenza" xmlns:ns18="urn:umaaxis"/>
+  <beanMapping languageSpecificType="java:it.csi.solmr.dto.profile.CodeDescription" qname="ns19:CodeDescription" xmlns:ns19="urn:umaaxis"/>
+  
+  <!-- mapping delle user defined exceptions -->
+  <beanMapping languageSpecificType="java:it.csi.solmr.exception.services.UmaServiceException" qname="ns20:UmaServiceException" xmlns:ns20="urn:umaaxis"/>
+  
+ </service>
+
+ <service name="Version" provider="java:RPC">
+  <parameter name="allowedMethods" value="getVersion"/>
+  <parameter name="className" value="org.apache.axis.Version"/>
+ </service>
+ <transport name="http">
+  <requestFlow>
+   <handler type="URLMapper"/>
+   <handler type="java:org.apache.axis.handlers.http.HTTPAuthHandler"/>
+  </requestFlow>
+ </transport>
+ <transport name="local">
+  <responseFlow>
+   <handler type="LocalResponder"/>
+  </responseFlow>
+ </transport>
+</deployment>

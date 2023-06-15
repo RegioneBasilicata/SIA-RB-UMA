@@ -1,0 +1,700 @@
+<wsdl:definitions name="ServiceGaaservImplService" targetNamespace="http://service.gaaserv.agricoltura.aizoon.it/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://service.gaaserv.agricoltura.aizoon.it/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+   <wsdl:types>
+      <xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://service.gaaserv.agricoltura.aizoon.it/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+         <xs:element name="gaaservGetAnagraficaTributariaByCUAARange" type="tns:gaaservGetAnagraficaTributariaByCUAARange"/>
+         <xs:element name="gaaservGetAnagraficaTributariaByCUAARangeResponse" type="tns:gaaservGetAnagraficaTributariaByCUAARangeResponse"/>
+         <xs:element name="gaaservGetListCodAtecoByIdAziendaRange" type="tns:gaaservGetListCodAtecoByIdAziendaRange"/>
+         <xs:element name="gaaservGetListCodAtecoByIdAziendaRangeResponse" type="tns:gaaservGetListCodAtecoByIdAziendaRangeResponse"/>
+         <xs:element name="isAlive" type="tns:isAlive"/>
+         <xs:element name="isAliveResponse" type="tns:isAliveResponse"/>
+         <xs:element name="serviceGetAziendeAAEPAnagrafe" type="tns:serviceGetAziendeAAEPAnagrafe"/>
+         <xs:element name="serviceGetAziendeAAEPAnagrafeResponse" type="tns:serviceGetAziendeAAEPAnagrafeResponse"/>
+         <xs:element name="serviceGetListAziendeByIdRange" type="tns:serviceGetListAziendeByIdRange"/>
+         <xs:element name="serviceGetListAziendeByIdRangeResponse" type="tns:serviceGetListAziendeByIdRangeResponse"/>
+         <xs:element name="serviceSianAggiornaDatiTributaria" type="tns:serviceSianAggiornaDatiTributaria"/>
+         <xs:element name="serviceSianAggiornaDatiTributariaResponse" type="tns:serviceSianAggiornaDatiTributariaResponse"/>
+         <xs:element name="testResources" type="tns:testResources"/>
+         <xs:element name="testResourcesResponse" type="tns:testResourcesResponse"/>
+         <xs:complexType name="serviceGetListAziendeByIdRange">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="arg0" type="xs:long"/>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:complexType name="serviceGetListAziendeByIdRangeResponse">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:anagAziendaVO"/>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:complexType name="anagAziendaVO">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="CCIAAannoIscrizione" type="xs:string"/>
+               <xs:element minOccurs="0" name="CCIAAnumRegImprese" type="xs:string"/>
+               <xs:element minOccurs="0" name="CCIAAnumeroREA" type="xs:long"/>
+               <xs:element minOccurs="0" name="CCIAAprovREA" type="xs:string"/>
+               <xs:element minOccurs="0" name="CUAA" type="xs:string"/>
+               <xs:element minOccurs="0" name="CUAAAnagrafeTributaria" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="CUAACollegati" nillable="true" type="xs:string"/>
+               <xs:element minOccurs="0" name="CUAASubentro" type="xs:string"/>
+               <xs:element minOccurs="0" name="causaleCessazione" type="xs:string"/>
+               <xs:element minOccurs="0" name="classeUde" type="xs:long"/>
+               <xs:element minOccurs="0" name="codFiscale" type="xs:string"/>
+               <xs:element minOccurs="0" name="codeAteco" type="xs:string"/>
+               <xs:element minOccurs="0" name="codeOte" type="xs:string"/>
+               <xs:element minOccurs="0" name="codiceComune" type="xs:string"/>
+               <xs:element minOccurs="0" name="cognome" type="xs:string"/>
+               <xs:element minOccurs="0" name="comuneNascitaPersonaFisica" type="xs:string"/>
+               <xs:element minOccurs="0" name="comuneResidenzaPersonaFisica" type="xs:string"/>
+               <xs:element minOccurs="0" name="dataAggiornamento" type="xs:dateTime"/>
+               <xs:element minOccurs="0" name="dataAggiornamentoOpr" type="xs:dateTime"/>
+               <xs:element minOccurs="0" name="dataAperturaFascicolo" type="xs:dateTime"/>
+               <xs:element minOccurs="0" name="dataAvanzata" type="xs:string"/>
+               <xs:element minOccurs="0" name="dataAvvenutoPassaggio" type="xs:string"/>
+               <xs:element minOccurs="0" name="dataCessazione" type="xs:dateTime"/>
+               <xs:element minOccurs="0" name="dataCessazioneStr" type="xs:string"/>
+               <xs:element minOccurs="0" name="dataChiusuraFascicolo" type="xs:dateTime"/>
+               <xs:element minOccurs="0" name="dataFineVal" type="xs:dateTime"/>
+               <xs:element minOccurs="0" name="dataIngresso" type="xs:dateTime"/>
+               <xs:element minOccurs="0" name="dataInizioVal" type="xs:dateTime"/>
+               <xs:element minOccurs="0" name="dataNascitaPersonaFisica" type="xs:string"/>
+               <xs:element minOccurs="0" name="dataPuntuale" type="xs:string"/>
+               <xs:element minOccurs="0" name="dataSituazioneAlStr" type="xs:string"/>
+               <xs:element minOccurs="0" name="dataUltimaModifica" type="xs:dateTime"/>
+               <xs:element minOccurs="0" name="dataUscita" type="xs:dateTime"/>
+               <xs:element minOccurs="0" name="delegaVO" type="tns:delegaVO"/>
+               <xs:element minOccurs="0" name="denominazione" type="xs:string"/>
+               <xs:element minOccurs="0" name="descAteco" type="xs:string"/>
+               <xs:element minOccurs="0" name="descComune" type="xs:string"/>
+               <xs:element minOccurs="0" name="descDimensioneAzienda" type="xs:string"/>
+               <xs:element minOccurs="0" name="descOte" type="xs:string"/>
+               <xs:element minOccurs="0" name="descrizioneEnteUtenteModifica" type="xs:string"/>
+               <xs:element minOccurs="0" name="descrizioneProvCompetenza" type="xs:string"/>
+               <xs:element minOccurs="0" name="descrizioneUtenteModifica" type="xs:string"/>
+               <xs:element minOccurs="0" name="enteUltimaModifica" type="xs:string"/>
+               <xs:element minOccurs="0" name="esoneroPagamentoGf" type="xs:string"/>
+               <xs:element minOccurs="0" name="fax" type="xs:string"/>
+               <xs:element name="flagAziendaProvvisoria" type="xs:boolean"/>
+               <xs:element minOccurs="0" name="flagCCIAA" type="xs:string"/>
+               <xs:element name="flagEnteAppartenenza" type="xs:boolean"/>
+               <xs:element minOccurs="0" name="flagFormaAssociata" type="xs:string"/>
+               <xs:element minOccurs="0" name="flagPartitaIva" type="xs:string"/>
+               <xs:element minOccurs="0" name="idAnagAzienda" type="xs:long"/>
+               <xs:element minOccurs="0" name="idAteco" type="xs:string"/>
+               <xs:element minOccurs="0" name="idAzienda" type="xs:long"/>
+               <xs:element minOccurs="0" name="idAziendaCollegata" type="xs:long"/>
+               <xs:element minOccurs="0" name="idAziendaProvenienza" type="xs:long"/>
+               <xs:element minOccurs="0" name="idAziendaSubentro" type="xs:long"/>
+               <xs:element minOccurs="0" name="idCessazione" type="xs:long"/>
+               <xs:element minOccurs="0" name="idDimensioneAzienda" type="xs:long"/>
+               <xs:element minOccurs="0" name="idFormaGiuridica" type="xs:long"/>
+               <xs:element minOccurs="0" name="idIntermediarioDelegato" type="xs:string"/>
+               <xs:element minOccurs="0" name="idOpr" type="xs:long"/>
+               <xs:element minOccurs="0" name="idOte" type="xs:string"/>
+               <xs:element minOccurs="0" name="idUde" type="xs:long"/>
+               <xs:element minOccurs="0" name="idUtenteAggiornamento" type="xs:long"/>
+               <xs:element minOccurs="0" name="idUtenteAggiornamentoOpr" type="xs:long"/>
+               <xs:element minOccurs="0" name="indirizzoResidenzaPersonaFisica" type="xs:string"/>
+               <xs:element minOccurs="0" name="intermediarioDelegato" type="xs:string"/>
+               <xs:element minOccurs="0" name="intestazionePartitaIva" type="xs:string"/>
+               <xs:element minOccurs="0" name="mail" type="xs:string"/>
+               <xs:element name="modificaAtecoSec" type="xs:boolean"/>
+               <xs:element minOccurs="0" name="modificaIntermediario" type="xs:string"/>
+               <xs:element minOccurs="0" name="motivoModifica" type="xs:string"/>
+               <xs:element minOccurs="0" name="nome" type="xs:string"/>
+               <xs:element minOccurs="0" name="note" type="xs:string"/>
+               <xs:element minOccurs="0" name="numeroAgea" type="xs:string"/>
+               <xs:element minOccurs="0" name="oldCUAA" type="xs:string"/>
+               <xs:element minOccurs="0" name="partitaIVA" type="xs:string"/>
+               <xs:element minOccurs="0" name="pec" type="xs:string"/>
+               <xs:element minOccurs="0" name="posizioneSchedario" type="xs:string"/>
+               <xs:element name="possiedeDelegaAttiva" type="xs:boolean"/>
+               <xs:element minOccurs="0" name="provCompetenza" type="xs:string"/>
+               <xs:element minOccurs="0" name="provincePiemonte" type="xs:string"/>
+               <xs:element minOccurs="0" name="provinciaNascitaPersonaFisica" type="xs:string"/>
+               <xs:element minOccurs="0" name="provinciaResidenzaPersonaFisica" type="xs:string"/>
+               <xs:element minOccurs="0" name="rappresentanteLegale" type="xs:string"/>
+               <xs:element minOccurs="0" name="rls" type="xs:decimal"/>
+               <xs:element minOccurs="0" name="sedelegCAP" type="xs:string"/>
+               <xs:element minOccurs="0" name="sedelegCittaEstero" type="xs:string"/>
+               <xs:element minOccurs="0" name="sedelegComune" type="xs:string"/>
+               <xs:element minOccurs="0" name="sedelegEstero" type="xs:string"/>
+               <xs:element minOccurs="0" name="sedelegIndirizzo" type="xs:string"/>
+               <xs:element minOccurs="0" name="sedelegIstatComune" type="xs:string"/>
+               <xs:element minOccurs="0" name="sedelegIstatProv" type="xs:string"/>
+               <xs:element minOccurs="0" name="sedelegProv" type="xs:string"/>
+               <xs:element minOccurs="0" name="sesso" type="xs:string"/>
+               <xs:element minOccurs="0" name="siglaProvCompetenza" type="xs:string"/>
+               <xs:element minOccurs="0" name="sitoWEB" type="xs:string"/>
+               <xs:element minOccurs="0" name="statoEstero" type="xs:string"/>
+               <xs:element minOccurs="0" name="statoEsteroNascitaPersonaFisica" type="xs:string"/>
+               <xs:element minOccurs="0" name="statoEsteroResidenzaPersonaFisica" type="xs:string"/>
+               <xs:element minOccurs="0" name="strAttivitaATECO" type="xs:string"/>
+               <xs:element minOccurs="0" name="strAttivitaOTE" type="xs:string"/>
+               <xs:element minOccurs="0" name="strCCIAAnumeroREA" type="xs:string"/>
+               <xs:element minOccurs="0" name="telefono" type="xs:string"/>
+               <xs:element minOccurs="0" name="tipiAzienda" type="xs:string"/>
+               <xs:element minOccurs="0" name="tipiFormaGiuridica" type="xs:string"/>
+               <xs:element minOccurs="0" name="tipiFormaGiuridicaNonIndividuale" type="xs:string"/>
+               <xs:element minOccurs="0" name="tipoAttivitaATECO" type="tns:codeDescription"/>
+               <xs:element minOccurs="0" name="tipoAttivitaOTE" type="tns:codeDescription"/>
+               <xs:element minOccurs="0" name="tipoCessazioneVO" type="tns:tipoCessazioneVO"/>
+               <xs:element minOccurs="0" name="tipoFormaGiuridica" type="tns:codeDescription"/>
+               <xs:element minOccurs="0" name="tipoTipologiaAzienda" type="tns:codeDescription"/>
+               <xs:element minOccurs="0" name="ultimaModifica" type="xs:string"/>
+               <xs:element minOccurs="0" name="unitaProduttiva" type="xs:string"/>
+               <xs:element minOccurs="0" name="utenteUltimaModifica" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="VAziendaATECOSec" nillable="true" type="xs:anyType"/>
+               <xs:element minOccurs="0" name="variazioneUtilizziAmmessa" type="xs:string"/>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:complexType name="delegaVO">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="cap" type="xs:string"/>
+               <xs:element minOccurs="0" name="codiceAgeaExcel" type="xs:string"/>
+               <xs:element minOccurs="0" name="codiceAmministrazione" type="xs:string"/>
+               <xs:element minOccurs="0" name="codiceFiscaleIntermediario" type="xs:string"/>
+               <xs:element minOccurs="0" name="comuneExcel" type="xs:string"/>
+               <xs:element minOccurs="0" name="dataFine" type="xs:dateTime"/>
+               <xs:element minOccurs="0" name="dataFineMandato" type="xs:dateTime"/>
+               <xs:element minOccurs="0" name="dataInizio" type="xs:dateTime"/>
+               <xs:element minOccurs="0" name="dataInizioMandato" type="xs:dateTime"/>
+               <xs:element minOccurs="0" name="dataOraFine" type="xs:string"/>
+               <xs:element minOccurs="0" name="dataOraInizio" type="xs:string"/>
+               <xs:element minOccurs="0" name="denomIntermediario" type="xs:string"/>
+               <xs:element minOccurs="0" name="denominazioneExcel" type="xs:string"/>
+               <xs:element minOccurs="0" name="descComune" type="xs:string"/>
+               <xs:element minOccurs="0" name="descrizioneProvincia" type="xs:string"/>
+               <xs:element minOccurs="0" name="elencoMandatiValidazioniFiltroEvcelVO" type="tns:elencoMandatiValidazioniFiltroExcelVO"/>
+               <xs:element minOccurs="0" name="enteUtenIrideIndDelega" type="xs:string"/>
+               <xs:element minOccurs="0" name="idAzienda" type="xs:long"/>
+               <xs:element minOccurs="0" name="idDelega" type="xs:long"/>
+               <xs:element minOccurs="0" name="idIntermediario" type="xs:long"/>
+               <xs:element minOccurs="0" name="idProcedimento" type="xs:long"/>
+               <xs:element minOccurs="0" name="idUfficioZonaIntermediario" type="xs:long"/>
+               <xs:element minOccurs="0" name="idUtenteFineDelega" type="xs:long"/>
+               <xs:element minOccurs="0" name="idUtenteInsDelega" type="xs:long"/>
+               <xs:element minOccurs="0" name="indirizzo" type="xs:string"/>
+               <xs:element minOccurs="0" name="indirizzoExcel" type="xs:string"/>
+               <xs:element minOccurs="0" name="istaComune" type="xs:string"/>
+               <xs:element minOccurs="0" name="nomeUtenIrideFineDelega" type="xs:string"/>
+               <xs:element minOccurs="0" name="nomeUtenIrideIndDelega" type="xs:string"/>
+               <xs:element minOccurs="0" name="provinciaExcel" type="xs:string"/>
+               <xs:element minOccurs="0" name="recapito" type="xs:string"/>
+               <xs:element minOccurs="0" name="siglaProvincia" type="xs:string"/>
+               <xs:element minOccurs="0" name="totaleMandati" type="xs:int"/>
+               <xs:element minOccurs="0" name="totaleMandatiExcel" type="xs:int"/>
+               <xs:element minOccurs="0" name="totaleMandatiValidati" type="xs:int"/>
+               <xs:element minOccurs="0" name="totaleMandatiValidatiExcel" type="xs:int"/>
+               <xs:element minOccurs="0" name="ufficioFascicolo" type="xs:string"/>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:complexType name="elencoMandatiValidazioniFiltroExcelVO">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="dataValidazioneAl" type="xs:string"/>
+               <xs:element minOccurs="0" name="dataValidazioneDal" type="xs:string"/>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:complexType name="codeDescription">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="code" type="xs:int"/>
+               <xs:element minOccurs="0" name="codeFlag" type="xs:string"/>
+               <xs:element minOccurs="0" name="description" type="xs:string"/>
+               <xs:element minOccurs="0" name="secondaryCode" type="xs:string"/>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:complexType name="tipoCessazioneVO">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="dataFineValidita" type="xs:dateTime"/>
+               <xs:element minOccurs="0" name="dataInizioValidita" type="xs:dateTime"/>
+               <xs:element minOccurs="0" name="descrizione" type="xs:string"/>
+               <xs:element minOccurs="0" name="idCessazione" type="xs:long"/>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:complexType name="isAlive">
+            <xs:sequence/>
+         </xs:complexType>
+         <xs:complexType name="isAliveResponse">
+            <xs:sequence>
+               <xs:element name="return" type="xs:boolean"/>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:complexType name="testResources">
+            <xs:sequence/>
+         </xs:complexType>
+         <xs:complexType name="testResourcesResponse">
+            <xs:sequence>
+               <xs:element name="return" type="xs:boolean"/>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:complexType name="serviceSianAggiornaDatiTributaria">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="arg0" type="xs:string"/>
+               <xs:element minOccurs="0" name="arg1" type="tns:sianUtenteVO"/>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:complexType name="sianUtenteVO">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="codiceEnte" type="xs:string"/>
+               <xs:element minOccurs="0" name="codiceFiscale" type="xs:string"/>
+               <xs:element name="idProcedimento" type="xs:long"/>
+               <xs:element minOccurs="0" name="ruolo" type="xs:string"/>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:complexType name="serviceSianAggiornaDatiTributariaResponse">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="xs:boolean"/>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:complexType name="serviceGetAziendeAAEPAnagrafe">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+               <xs:element name="arg1" type="xs:boolean"/>
+               <xs:element minOccurs="0" name="arg2" type="xs:boolean"/>
+               <xs:element minOccurs="0" name="arg3" type="xs:boolean"/>
+               <xs:element name="arg4" type="xs:boolean"/>
+               <xs:element name="arg5" type="xs:boolean"/>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:complexType name="serviceGetAziendeAAEPAnagrafeResponse">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="return" type="tns:parametroRitornoVO"/>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:complexType name="parametroRitornoVO">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="idAzienda" nillable="true" type="xs:long"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="messaggio" nillable="true" type="xs:string"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="ruoloAAEP" nillable="true" type="tns:stringcodeDescription"/>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:complexType name="stringcodeDescription">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="code" type="xs:string"/>
+               <xs:element minOccurs="0" name="description" type="xs:string"/>
+               <xs:element minOccurs="0" name="secondaryCode" type="xs:long"/>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:complexType name="gaaservGetAnagraficaTributariaByCUAARange">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="arg0" type="xs:string"/>
+               <xs:element minOccurs="0" name="arg1" type="tns:sianUtenteVO"/>
+               <xs:element name="arg2" type="xs:int"/>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:complexType name="gaaservGetAnagraficaTributariaByCUAARangeResponse">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:anagraficaTributariaVO"/>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:complexType name="anagraficaTributariaVO">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="aziendaTributariaVO" type="tns:atAziendaTributariaVO"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="cfCollegatiSian" nillable="true" type="tns:atCfCollegatiSianVO"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="domicilioFiscVariatoSian" nillable="true" type="tns:atDomicilioFiscVariatoSianVO"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="partiteIvaAttribuiteSian" nillable="true" type="tns:atPartiteIvaAttribuiteSianVO"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="rappresentantiSocietaSian" nillable="true" type="tns:atRappresentantiSocietaSianVO"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="residenzaVariataSian" nillable="true" type="tns:atResidenzaVariataSianVO"/>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="societaRappresentateSian" nillable="true" type="tns:atSocietaRappresentateSianVO"/>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:complexType name="atAziendaTributariaVO">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="cap" type="xs:string"/>
+               <xs:element minOccurs="0" name="capDomicilioFiscale" type="xs:string"/>
+               <xs:element minOccurs="0" name="capSedeLegale" type="xs:string"/>
+               <xs:element minOccurs="0" name="codiceAteco" type="xs:string"/>
+               <xs:element minOccurs="0" name="codiceFiscaleRappresentante" type="xs:string"/>
+               <xs:element minOccurs="0" name="cognome" type="xs:string"/>
+               <xs:element minOccurs="0" name="cognomeRappresentante" type="xs:string"/>
+               <xs:element minOccurs="0" name="comune" type="xs:string"/>
+               <xs:element minOccurs="0" name="comuneDomicilioFiscale" type="xs:string"/>
+               <xs:element minOccurs="0" name="comuneNascita" type="xs:string"/>
+               <xs:element minOccurs="0" name="comuneSedeLegale" type="xs:string"/>
+               <xs:element minOccurs="0" name="cuaa" type="xs:string"/>
+               <xs:element minOccurs="0" name="cuaaAnagrafeTributaria" type="xs:string"/>
+               <xs:element minOccurs="0" name="dataAggiornamento" type="xs:dateTime"/>
+               <xs:element minOccurs="0" name="dataAggiornamentoGAA" type="xs:string"/>
+               <xs:element minOccurs="0" name="dataDecesso" type="xs:dateTime"/>
+               <xs:element minOccurs="0" name="dataDecessoRappresentante" type="xs:dateTime"/>
+               <xs:element minOccurs="0" name="dataInizioAttivita" type="xs:dateTime"/>
+               <xs:element minOccurs="0" name="dataNascita" type="xs:dateTime"/>
+               <xs:element minOccurs="0" name="denominazione" type="xs:string"/>
+               <xs:element minOccurs="0" name="denominazioneRappresentante" type="xs:string"/>
+               <xs:element minOccurs="0" name="descrizioneStatoAttivita" type="xs:string"/>
+               <xs:element minOccurs="0" name="descrizioneTipoCarica" type="xs:string"/>
+               <xs:element minOccurs="0" name="flagPresenteAT" type="xs:string"/>
+               <xs:element minOccurs="0" name="flagPresenteGAA" type="xs:string"/>
+               <xs:element minOccurs="0" name="formaGiuridica" type="xs:string"/>
+               <xs:element minOccurs="0" name="idAttivitaAteco" type="xs:long"/>
+               <xs:element name="idAziendaTributaria" type="xs:long"/>
+               <xs:element minOccurs="0" name="indirizzo" type="xs:string"/>
+               <xs:element minOccurs="0" name="indirizzoDomicilioFiscale" type="xs:string"/>
+               <xs:element minOccurs="0" name="indirizzoSedeLegale" type="xs:string"/>
+               <xs:element minOccurs="0" name="messaggioErrore" type="xs:string"/>
+               <xs:element minOccurs="0" name="nome" type="xs:string"/>
+               <xs:element minOccurs="0" name="nomeRappresentante" type="xs:string"/>
+               <xs:element minOccurs="0" name="partitaIVA" type="xs:string"/>
+               <xs:element minOccurs="0" name="provincia" type="xs:string"/>
+               <xs:element minOccurs="0" name="provinciaDomicilioFiscale" type="xs:string"/>
+               <xs:element minOccurs="0" name="provinciaNascita" type="xs:string"/>
+               <xs:element minOccurs="0" name="provinciaSedeLegale" type="xs:string"/>
+               <xs:element minOccurs="0" name="sesso" type="xs:string"/>
+               <xs:element minOccurs="0" name="statoAttivita" type="xs:string"/>
+               <xs:element minOccurs="0" name="tipoAttivita" type="xs:string"/>
+               <xs:element minOccurs="0" name="tipoCarica" type="xs:string"/>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:complexType name="atCfCollegatiSianVO">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="codiceFiscalePF" type="xs:string"/>
+               <xs:element minOccurs="0" name="codiceFiscalePG" type="xs:string"/>
+               <xs:element minOccurs="0" name="cuaa" type="xs:string"/>
+               <xs:element name="idCfCollegatiSian" type="xs:long"/>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:complexType name="atDomicilioFiscVariatoSianVO">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="capDomicilioFiscale" type="xs:string"/>
+               <xs:element minOccurs="0" name="comuneDomicilioFiscale" type="xs:string"/>
+               <xs:element minOccurs="0" name="cuaa" type="xs:string"/>
+               <xs:element minOccurs="0" name="dataFine" type="xs:dateTime"/>
+               <xs:element name="idDomicilioFiscVariatoSian" type="xs:long"/>
+               <xs:element minOccurs="0" name="indirizzoDomicilioFiscale" type="xs:string"/>
+               <xs:element minOccurs="0" name="provinciaDomicilioFiscale" type="xs:string"/>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:complexType name="atPartiteIvaAttribuiteSianVO">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="cuaa" type="xs:string"/>
+               <xs:element minOccurs="0" name="dataFine" type="xs:dateTime"/>
+               <xs:element minOccurs="0" name="descrizioneModFine" type="xs:string"/>
+               <xs:element minOccurs="0" name="descrizioneModelloFine" type="xs:string"/>
+               <xs:element minOccurs="0" name="descrizioneTipoFine" type="xs:string"/>
+               <xs:element minOccurs="0" name="descrizioneTipoFinePF" type="xs:string"/>
+               <xs:element minOccurs="0" name="descrizioneTipoFinePnf" type="xs:string"/>
+               <xs:element name="idPartiteIvaAttribuiteSian" type="xs:long"/>
+               <xs:element minOccurs="0" name="modelloFine" type="xs:string"/>
+               <xs:element minOccurs="0" name="partitaIva" type="xs:string"/>
+               <xs:element minOccurs="0" name="partitaIvaConfluenza" type="xs:string"/>
+               <xs:element minOccurs="0" name="tipoFine" type="xs:string"/>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:complexType name="atRappresentantiSocietaSianVO">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="codiceFiscale" type="xs:string"/>
+               <xs:element minOccurs="0" name="cuaa" type="xs:string"/>
+               <xs:element minOccurs="0" name="dataFine" type="xs:dateTime"/>
+               <xs:element minOccurs="0" name="dataInizio" type="xs:dateTime"/>
+               <xs:element minOccurs="0" name="decodificaTipoCaricaPF" type="xs:string"/>
+               <xs:element minOccurs="0" name="decodificaTipoCaricaPNF" type="xs:string"/>
+               <xs:element minOccurs="0" name="descrizioneTipoCarica" type="xs:string"/>
+               <xs:element name="idRappresentantiSocietaSian" type="xs:long"/>
+               <xs:element minOccurs="0" name="tipoCarica" type="xs:string"/>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:complexType name="atResidenzaVariataSianVO">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="capResidenza" type="xs:string"/>
+               <xs:element minOccurs="0" name="comuneResidenza" type="xs:string"/>
+               <xs:element minOccurs="0" name="cuaa" type="xs:string"/>
+               <xs:element minOccurs="0" name="dataFine" type="xs:dateTime"/>
+               <xs:element minOccurs="0" name="dataInizio" type="xs:dateTime"/>
+               <xs:element name="idResidenzaVariataSian" type="xs:long"/>
+               <xs:element minOccurs="0" name="indirizzoResidenza" type="xs:string"/>
+               <xs:element minOccurs="0" name="provinciaResidenza" type="xs:string"/>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:complexType name="atSocietaRappresentateSianVO">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="codiceFiscaleRappresentato" type="xs:string"/>
+               <xs:element minOccurs="0" name="cuaa" type="xs:string"/>
+               <xs:element minOccurs="0" name="dataFine" type="xs:dateTime"/>
+               <xs:element minOccurs="0" name="dataInizio" type="xs:dateTime"/>
+               <xs:element minOccurs="0" name="decodificaTipoRappresentanza" type="xs:string"/>
+               <xs:element minOccurs="0" name="descrizioneTipoRappresentanza" type="xs:string"/>
+               <xs:element name="idSocietaRappresentateSian" type="xs:long"/>
+               <xs:element minOccurs="0" name="tipoRappresentanza" type="xs:string"/>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:complexType name="gaaservGetListCodAtecoByIdAziendaRange">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="arg0" type="xs:long"/>
+               <xs:element minOccurs="0" name="arg1" type="xs:dateTime"/>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:complexType name="gaaservGetListCodAtecoByIdAziendaRangeResponse">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:aziendaAtecoVO"/>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:complexType name="aziendaAtecoVO">
+            <xs:sequence>
+               <xs:element maxOccurs="unbounded" minOccurs="0" name="attivitaAtecoVO" nillable="true" type="tns:attivitaAtecoVO"/>
+               <xs:element minOccurs="0" name="idAzienda" type="xs:long"/>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:complexType name="attivitaAtecoVO">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="codiceAttivita" type="xs:string"/>
+               <xs:element minOccurs="0" name="descrizioneAttivita" type="xs:string"/>
+               <xs:element minOccurs="0" name="flagAttivitaAgricola" type="xs:string"/>
+               <xs:element minOccurs="0" name="flagAttivitaPrincipale" type="xs:string"/>
+               <xs:element name="idAttivitaAteco" type="xs:long"/>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:element name="InvalidParameterException" type="tns:InvalidParameterException"/>
+         <xs:complexType name="InvalidParameterException">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="parameterName" type="xs:string"/>
+               <xs:element minOccurs="0" name="parameterName" type="xs:string"/>
+               <xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+               <xs:element minOccurs="0" name="message" type="xs:string"/>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:element name="GaaservInternalException" type="tns:GaaservInternalException"/>
+         <xs:complexType name="GaaservInternalException">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+               <xs:element minOccurs="0" name="message" type="xs:string"/>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:element name="Exception" type="tns:Exception"/>
+         <xs:complexType name="Exception">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="message" type="xs:string"/>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:element name="QueryTimeOutException" type="tns:QueryTimeOutException"/>
+         <xs:complexType name="QueryTimeOutException">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+               <xs:element minOccurs="0" name="message" type="xs:string"/>
+            </xs:sequence>
+         </xs:complexType>
+         <xs:element name="MaxRangeException" type="tns:MaxRangeException"/>
+         <xs:complexType name="MaxRangeException">
+            <xs:sequence>
+               <xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+               <xs:element minOccurs="0" name="message" type="xs:string"/>
+            </xs:sequence>
+         </xs:complexType>
+      </xs:schema>
+   </wsdl:types>
+   <wsdl:message name="gaaservGetAnagraficaTributariaByCUAARangeResponse">
+      <wsdl:part element="tns:gaaservGetAnagraficaTributariaByCUAARangeResponse" name="parameters"/>
+   </wsdl:message>
+   <wsdl:message name="gaaservGetListCodAtecoByIdAziendaRangeResponse">
+      <wsdl:part element="tns:gaaservGetListCodAtecoByIdAziendaRangeResponse" name="parameters"/>
+   </wsdl:message>
+   <wsdl:message name="serviceGetListAziendeByIdRangeResponse">
+      <wsdl:part element="tns:serviceGetListAziendeByIdRangeResponse" name="parameters"/>
+   </wsdl:message>
+   <wsdl:message name="serviceGetListAziendeByIdRange">
+      <wsdl:part element="tns:serviceGetListAziendeByIdRange" name="parameters"/>
+   </wsdl:message>
+   <wsdl:message name="testResourcesResponse">
+      <wsdl:part element="tns:testResourcesResponse" name="parameters"/>
+   </wsdl:message>
+   <wsdl:message name="testResources">
+      <wsdl:part element="tns:testResources" name="parameters"/>
+   </wsdl:message>
+   <wsdl:message name="QueryTimeOutException">
+      <wsdl:part element="tns:QueryTimeOutException" name="QueryTimeOutException"/>
+   </wsdl:message>
+   <wsdl:message name="GaaservInternalException">
+      <wsdl:part element="tns:GaaservInternalException" name="GaaservInternalException"/>
+   </wsdl:message>
+   <wsdl:message name="isAliveResponse">
+      <wsdl:part element="tns:isAliveResponse" name="parameters"/>
+   </wsdl:message>
+   <wsdl:message name="serviceSianAggiornaDatiTributaria">
+      <wsdl:part element="tns:serviceSianAggiornaDatiTributaria" name="parameters"/>
+   </wsdl:message>
+   <wsdl:message name="Exception">
+      <wsdl:part element="tns:Exception" name="Exception"/>
+   </wsdl:message>
+   <wsdl:message name="MaxRangeException">
+      <wsdl:part element="tns:MaxRangeException" name="MaxRangeException"/>
+   </wsdl:message>
+   <wsdl:message name="InvalidParameterException">
+      <wsdl:part element="tns:InvalidParameterException" name="InvalidParameterException"/>
+   </wsdl:message>
+   <wsdl:message name="isAlive">
+      <wsdl:part element="tns:isAlive" name="parameters"/>
+   </wsdl:message>
+   <wsdl:message name="serviceSianAggiornaDatiTributariaResponse">
+      <wsdl:part element="tns:serviceSianAggiornaDatiTributariaResponse" name="parameters"/>
+   </wsdl:message>
+   <wsdl:message name="serviceGetAziendeAAEPAnagrafeResponse">
+      <wsdl:part element="tns:serviceGetAziendeAAEPAnagrafeResponse" name="parameters"/>
+   </wsdl:message>
+   <wsdl:message name="serviceGetAziendeAAEPAnagrafe">
+      <wsdl:part element="tns:serviceGetAziendeAAEPAnagrafe" name="parameters"/>
+   </wsdl:message>
+   <wsdl:message name="gaaservGetAnagraficaTributariaByCUAARange">
+      <wsdl:part element="tns:gaaservGetAnagraficaTributariaByCUAARange" name="parameters"/>
+   </wsdl:message>
+   <wsdl:message name="gaaservGetListCodAtecoByIdAziendaRange">
+      <wsdl:part element="tns:gaaservGetListCodAtecoByIdAziendaRange" name="parameters"/>
+   </wsdl:message>
+   <wsdl:portType name="ServiceGaaserv">
+      <wsdl:operation name="serviceGetListAziendeByIdRange">
+         <wsdl:input message="tns:serviceGetListAziendeByIdRange" name="serviceGetListAziendeByIdRange"/>
+         <wsdl:output message="tns:serviceGetListAziendeByIdRangeResponse" name="serviceGetListAziendeByIdRangeResponse"/>
+         <wsdl:fault message="tns:InvalidParameterException" name="InvalidParameterException"/>
+         <wsdl:fault message="tns:GaaservInternalException" name="GaaservInternalException"/>
+      </wsdl:operation>
+      <wsdl:operation name="isAlive">
+         <wsdl:input message="tns:isAlive" name="isAlive"/>
+         <wsdl:output message="tns:isAliveResponse" name="isAliveResponse"/>
+         <wsdl:fault message="tns:Exception" name="Exception"/>
+      </wsdl:operation>
+      <wsdl:operation name="testResources">
+         <wsdl:input message="tns:testResources" name="testResources"/>
+         <wsdl:output message="tns:testResourcesResponse" name="testResourcesResponse"/>
+         <wsdl:fault message="tns:Exception" name="Exception"/>
+      </wsdl:operation>
+      <wsdl:operation name="serviceSianAggiornaDatiTributaria">
+         <wsdl:input message="tns:serviceSianAggiornaDatiTributaria" name="serviceSianAggiornaDatiTributaria"/>
+         <wsdl:output message="tns:serviceSianAggiornaDatiTributariaResponse" name="serviceSianAggiornaDatiTributariaResponse"/>
+         <wsdl:fault message="tns:QueryTimeOutException" name="QueryTimeOutException"/>
+         <wsdl:fault message="tns:GaaservInternalException" name="GaaservInternalException"/>
+         <wsdl:fault message="tns:MaxRangeException" name="MaxRangeException"/>
+      </wsdl:operation>
+      <wsdl:operation name="serviceGetAziendeAAEPAnagrafe">
+         <wsdl:input message="tns:serviceGetAziendeAAEPAnagrafe" name="serviceGetAziendeAAEPAnagrafe"/>
+         <wsdl:output message="tns:serviceGetAziendeAAEPAnagrafeResponse" name="serviceGetAziendeAAEPAnagrafeResponse"/>
+         <wsdl:fault message="tns:InvalidParameterException" name="InvalidParameterException"/>
+         <wsdl:fault message="tns:GaaservInternalException" name="GaaservInternalException"/>
+      </wsdl:operation>
+      <wsdl:operation name="gaaservGetAnagraficaTributariaByCUAARange">
+         <wsdl:input message="tns:gaaservGetAnagraficaTributariaByCUAARange" name="gaaservGetAnagraficaTributariaByCUAARange"/>
+         <wsdl:output message="tns:gaaservGetAnagraficaTributariaByCUAARangeResponse" name="gaaservGetAnagraficaTributariaByCUAARangeResponse"/>
+         <wsdl:fault message="tns:QueryTimeOutException" name="QueryTimeOutException"/>
+         <wsdl:fault message="tns:GaaservInternalException" name="GaaservInternalException"/>
+         <wsdl:fault message="tns:MaxRangeException" name="MaxRangeException"/>
+      </wsdl:operation>
+      <wsdl:operation name="gaaservGetListCodAtecoByIdAziendaRange">
+         <wsdl:input message="tns:gaaservGetListCodAtecoByIdAziendaRange" name="gaaservGetListCodAtecoByIdAziendaRange"/>
+         <wsdl:output message="tns:gaaservGetListCodAtecoByIdAziendaRangeResponse" name="gaaservGetListCodAtecoByIdAziendaRangeResponse"/>
+         <wsdl:fault message="tns:QueryTimeOutException" name="QueryTimeOutException"/>
+         <wsdl:fault message="tns:GaaservInternalException" name="GaaservInternalException"/>
+         <wsdl:fault message="tns:MaxRangeException" name="MaxRangeException"/>
+      </wsdl:operation>
+   </wsdl:portType>
+   <wsdl:binding name="ServiceGaaservImplServiceSoapBinding" type="tns:ServiceGaaserv">
+      <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+      <wsdl:operation name="isAlive">
+         <soap:operation soapAction="" style="document"/>
+         <wsdl:input name="isAlive">
+            <soap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="isAliveResponse">
+            <soap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="Exception">
+            <soap:fault name="Exception" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="serviceGetListAziendeByIdRange">
+         <soap:operation soapAction="" style="document"/>
+         <wsdl:input name="serviceGetListAziendeByIdRange">
+            <soap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="serviceGetListAziendeByIdRangeResponse">
+            <soap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="InvalidParameterException">
+            <soap:fault name="InvalidParameterException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="GaaservInternalException">
+            <soap:fault name="GaaservInternalException" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="testResources">
+         <soap:operation soapAction="" style="document"/>
+         <wsdl:input name="testResources">
+            <soap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="testResourcesResponse">
+            <soap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="Exception">
+            <soap:fault name="Exception" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="serviceSianAggiornaDatiTributaria">
+         <soap:operation soapAction="" style="document"/>
+         <wsdl:input name="serviceSianAggiornaDatiTributaria">
+            <soap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="serviceSianAggiornaDatiTributariaResponse">
+            <soap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="QueryTimeOutException">
+            <soap:fault name="QueryTimeOutException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="GaaservInternalException">
+            <soap:fault name="GaaservInternalException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="MaxRangeException">
+            <soap:fault name="MaxRangeException" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="serviceGetAziendeAAEPAnagrafe">
+         <soap:operation soapAction="" style="document"/>
+         <wsdl:input name="serviceGetAziendeAAEPAnagrafe">
+            <soap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="serviceGetAziendeAAEPAnagrafeResponse">
+            <soap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="InvalidParameterException">
+            <soap:fault name="InvalidParameterException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="GaaservInternalException">
+            <soap:fault name="GaaservInternalException" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="gaaservGetAnagraficaTributariaByCUAARange">
+         <soap:operation soapAction="" style="document"/>
+         <wsdl:input name="gaaservGetAnagraficaTributariaByCUAARange">
+            <soap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="gaaservGetAnagraficaTributariaByCUAARangeResponse">
+            <soap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="QueryTimeOutException">
+            <soap:fault name="QueryTimeOutException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="GaaservInternalException">
+            <soap:fault name="GaaservInternalException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="MaxRangeException">
+            <soap:fault name="MaxRangeException" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="gaaservGetListCodAtecoByIdAziendaRange">
+         <soap:operation soapAction="" style="document"/>
+         <wsdl:input name="gaaservGetListCodAtecoByIdAziendaRange">
+            <soap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="gaaservGetListCodAtecoByIdAziendaRangeResponse">
+            <soap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="QueryTimeOutException">
+            <soap:fault name="QueryTimeOutException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="GaaservInternalException">
+            <soap:fault name="GaaservInternalException" use="literal"/>
+         </wsdl:fault>
+         <wsdl:fault name="MaxRangeException">
+            <soap:fault name="MaxRangeException" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>
+   </wsdl:binding>
+   <wsdl:service name="ServiceGaaservImplService">
+      <wsdl:port binding="tns:ServiceGaaservImplServiceSoapBinding" name="ServiceGaaservImplPort">
+         <soap:address location="http://localhost:8080/gaaserv/ServiceGaaservImpl"/>
+      </wsdl:port>
+   </wsdl:service>
+</wsdl:definitions>
